@@ -16,6 +16,10 @@
 // Written by Phil Burgess / Paint Your Dragon for Adafruit Industries.
 // MIT license.  SPI FIFO insight from Paul Stoffregen's ILI9341_t3 library.
 // Inspired by David Boccabella's (Marcwolf) hybrid servo/OLED eye concept.
+//
+// Modified by Chris Kuhi to add sound output and some additional trigger 
+// logic
+//
 //--------------------------------------------------------------------------
 
 #include <SPI.h>
@@ -367,7 +371,7 @@ void drawEye( // Renders one eye.  Inputs must be pre-clipped & valid.
   //PIR detect
   if(digitalRead(MOTION_SENSOR_PIN)){  //PIR triggered
     // Serial.println("PIR triggered");
-    if((millis() - lastTriggerTime) >=5000) { // trigger audio, no more often then every 5 seconds
+    if((millis() - lastTriggerTime) >=5000) { // trigger audio, no more often than every 5 seconds
       // play_tune(sounddata_data, sizeof(sounddata_data));
       Serial.println("PIR triggered!");
       if(!musicPlayer.playingMusic) {
